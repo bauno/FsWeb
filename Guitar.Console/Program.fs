@@ -3,7 +3,7 @@
 
 open RavenModule
 open FsWeb.Models
-open FsWeb.Repositories
+open FsWeb.Repositories.GuitarRepository
 
 [<EntryPoint>]
 let main argv = 

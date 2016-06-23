@@ -18,3 +18,12 @@ module CacheAgent =
                 }
         loop Map.empty)
 
+    let get<'a> key =
+        agent.PostAndReply(fun reply -> Message.Get(key, reply))
+        |> function
+            | Some v -> v :?> 'a |> Some
+            | None -> None
+
+    let set key value =
+        Message.Set(key, value) |> agent.Post
+

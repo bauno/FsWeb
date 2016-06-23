@@ -3,7 +3,7 @@ open System.Web.Mvc
 open System
 open FsWeb.Models
 open FsWeb.Repositories
-
+open GuitarRepository
 
 [<HandleError>]
 type GuitarsController(context: IDisposable, ?repository) =
