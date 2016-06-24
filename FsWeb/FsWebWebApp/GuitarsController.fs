@@ -4,6 +4,7 @@ open System
 open FsWeb.Models
 open FsWeb.Repositories
 open GuitarRepository
+open Repository
 
 [<HandleError>]
 type GuitarsController(context: IDisposable, ?repository) =
@@ -18,11 +19,11 @@ type GuitarsController(context: IDisposable, ?repository) =
             |> Repository.get    
     new() = new GuitarsController(new GuitarsRepository())
     member this.Index () =
-        // The sequence is hardcoded for example purposes
-        // It will be switched out in a future example.
-        Repository.getAll() 
-        |> fromRepository
-        |> this.View
+        getAll() |> fromRepository <| withCacheKeyOf("AllGuitars") |> this.View
+        
+//        GuitarsRepository.getAll()
+//        |> fromRepository
+//        |> this.View
     override x.Dispose disposing =
         context.Dispose()
         base.Dispose disposing
